@@ -40,9 +40,9 @@ The three scripts `1-1.py`, `n-m.py`, and `linear_network.py` are **self-contain
 
 Contains:
 
-- `riccati(rho_l, rho_r, lambda_, eta, x)` — closed-form density profile \(q(x)\) on a street
-- `default_params` — default street parameters \((\lambda, \eta, L, q_{\max})\)
-- `params_for_short_street` — same, but with small \(L\) (useful for short links)
+- `riccati(rho_l, rho_r, lambda_, eta, x)` — closed-form density profile $q(x)$ on a street
+- `default_params` — default street parameters $(\lambda, \eta, L, q_{\max})$
+- `params_for_short_street` — same, but with small $L$ (useful for short links)
 - `rho_l_in`, `rho_r_out` — prescribed boundary densities at origins / destinations
 
 Used by `network_classes.py`.
@@ -56,16 +56,16 @@ Modular implementation of a full traffic network.
 ### Main classes
 
 - **`Crossroad`** — network node (origin / interior / destination)
-- **`Street`** — directed edge with parameters; computes \(q(x)\), \(W(x)\), \(v(x)\), travel time
+- **`Street`** — directed edge with parameters; computes $q(x)$, $W(x)$, $v(x)$, travel time
 - **`Commodity`** — path through crossroads (routing; currently optional / simple)
-- **`Network`** — collects the graph and solves the steady-state system \(F(b)=0\) for buffer loads \(b\)
+- **`Network`** — collects the graph and solves the steady-state system $F(b)=0$ for buffer loads $b$
 
 ### Typical workflow
 
 1. Choose street parameters (or use `utils.default_params`)
 2. Create crossroads and connect them with street templates
 3. Build a `Network`
-4. Call `network.solve()` to obtain \(b^\star\)
+4. Call `network.solve()` to obtain $b^\star$
 5. Plot / evaluate densities, velocities, nonlocal impact, travel times
 
 Minimal example:
@@ -88,7 +88,7 @@ print(b_star)
 
 In `network_classes.py` you can run selected demo functions, for example:
 
-- `showcase_network()` — solve a \(3\times 3\) grid and save plots to `images/`
+- `showcase_network()` — solve a $3\times 3$ grid and save plots to `images/`
 - `solve_braexes_network()` — Braess network with / without the extra street
 - `solve_line_like_braess()` — short middle street in a line
 
@@ -126,7 +126,7 @@ Topology:
 R1 ---> [Junction] ---> R2
 ```
 
-- Prescribes \(\rho_l\) on the incoming road and \(\rho_r\) on the outgoing road
+- Prescribes $\rho_l$ on the incoming road and $\rho_r$ on the outgoing road
 - Solves for the buffer / unknown boundary values
 - Saves plots under `1-1/`
 
@@ -187,12 +187,12 @@ Each demo typically creates:
 
 | Symbol | Meaning |
 |---|---|
-| q(x) | density along a road |
-| W(x) | nonlocal impact / perceived congestion ahead |
-| v(x)=e^{-\lambda W(x)} | velocity |
-| b | buffer load(s) at the beginning of outgoing roads |
-| \rho_l, \rho_r | left / right boundary densities of a road |
-| \daleth | travel time \(\int_0^L 1/v(x)\,dx\) (in `network_classes.py`) |
+| $q(x)$ | density along a road |
+| $W(x)$ | nonlocal impact / perceived congestion ahead |
+| $v(x)=e^{-\lambda W(x)}$ | velocity |
+| $b$ | buffer load(s) at the beginning of outgoing roads |
+| $\rho_l$, $\rho_r$ | left / right boundary densities of a road |
+| travel time $\daleth$ | $\int_0^L \frac{1}{v(x)}\,dx$ (in `network_classes.py`) |
 
 ---
 
